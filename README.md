@@ -71,6 +71,16 @@ The Orchestrator Chat (`pages/OrchestratorChat.tsx`) acts as the central router 
 
 The chat interface visually represents the AI's "thought process" (reasoning chain) before generating a response with relevant data widgets and actionable links.
 
+## Brutally Honest: AI Simulated Features
+
+While this platform visually mimics an advanced AI-driven Multi-Agent System, **there is currently no real LLM or AI backend integrated.** All "intelligent" behaviors are simulated via front-end logic:
+
+- **Hardcoded Intent Classification:** The Orchestrator does not use NLP to understand user queries. Instead, it relies on strict Regex and keyword matching (e.g., checking for words like "planning", "stock", "shipment") to classify intent into hardcoded types (`CONVERSATION`, `ACTION`, `QUERY`).
+- **Simulated Reasoning Chains:** The "thought process" steps and delays shown in the chat UI are artificially generated using hardcoded text arrays and `setTimeout` delays to create the illusion of processing.
+- **Static Mock Data:** All responses, metrics, and anomaly reports returned by the "agents" are pulled from static datasets located in `mockData.ts`. If a specific SKU or shipment ID isn't hardcoded in that file, the system falls back to a generic summary.
+- **Fake Streaming Responses:** The "typing" effect of the assistant's responses is achieved by simply splitting a hardcoded string and rendering words one by one with a random millisecond delay.
+- **No Real Database or Live Connectivity:** The system does not connect to any actual ERP, logistics tracking APIs, or sensor databases.
+
 ## Project Structure
 
 ```
