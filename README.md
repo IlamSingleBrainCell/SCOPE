@@ -71,15 +71,14 @@ The Orchestrator Chat (`pages/OrchestratorChat.tsx`) acts as the central router 
 
 The chat interface visually represents the AI's "thought process" (reasoning chain) before generating a response with relevant data widgets and actionable links.
 
-## Brutally Honest: AI Simulated Features
+## Real AI Integration
 
-While this platform visually mimics an advanced AI-driven Multi-Agent System, **there is currently no real LLM or AI backend integrated.** All "intelligent" behaviors are simulated via front-end logic:
+This platform integrates with the actual **Gemini API** to provide true conversational understanding and dynamic responses:
 
-- **Hardcoded Intent Classification:** The Orchestrator does not use NLP to understand user queries. Instead, it relies on strict Regex and keyword matching (e.g., checking for words like "planning", "stock", "shipment") to classify intent into hardcoded types (`CONVERSATION`, `ACTION`, `QUERY`).
-- **Simulated Reasoning Chains:** The "thought process" steps and delays shown in the chat UI are artificially generated using hardcoded text arrays and `setTimeout` delays to create the illusion of processing.
-- **Static Mock Data:** All responses, metrics, and anomaly reports returned by the "agents" are pulled from static datasets located in `mockData.ts`. If a specific SKU or shipment ID isn't hardcoded in that file, the system falls back to a generic summary.
-- **Fake Streaming Responses:** The "typing" effect of the assistant's responses is achieved by simply splitting a hardcoded string and rendering words one by one with a random millisecond delay.
-- **No Real Database or Live Connectivity:** The system does not connect to any actual ERP, logistics tracking APIs, or sensor databases.
+- **AI Intent Classification:** When an API key is provided, the Orchestrator uses the Gemini LLM to interpret user queries and dynamically route them to the appropriate domain agents (e.g., Planning, Logistics).
+- **Dynamic Response Generation:** Rather than relying entirely on hardcoded responses, the Orchestrator generates context-aware, flowing answers utilizing the Google Generative AI streaming SDK.
+- **Static Mock Data fallback:** While the AI dynamically shapes the conversation, the foundational underlying business data (e.g., SKU metrics, shipment tracking) is still sourced from static datasets located in `mockData.ts` to mimic a pseudo-database without requiring a complex backend.
+- **Graceful Fallback:** If the `VITE_GEMINI_API_KEY` is not provided in `.env.local`, the platform will seamlessly degrade to using front-end Regex logic and simulated typing delays so the interface remains functional.
 
 ## Project Structure
 
